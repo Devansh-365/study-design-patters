@@ -149,6 +149,28 @@ npm run dev
   } catch (error) {
     console.error("Error installing dependencies:", error);
   }
+
+  // Update root package.json scripts
+  try {
+    const rootPackageJsonPath = path.join(__dirname, "../package.json");
+    const rootPackageJson = JSON.parse(
+      fs.readFileSync(rootPackageJsonPath, "utf-8"),
+    );
+
+    rootPackageJson.scripts[`dev:${patternName.toLowerCase()}`] =
+      `npm run --cwd patterns/${patternName} dev`;
+    rootPackageJson.scripts[`build:${patternName.toLowerCase()}`] =
+      `npm run --cwd patterns/${patternName} build`;
+    rootPackageJson.scripts[`test:${patternName.toLowerCase()}`] =
+      `npm run --cwd patterns/${patternName} test`;
+
+    fs.writeFileSync(
+      rootPackageJsonPath,
+      JSON.stringify(rootPackageJson, null, 2),
+    );
+  } catch (error) {
+    console.error("Error updating root package.json:", error);
+  }
 }
 
 // Get pattern name from command line arguments

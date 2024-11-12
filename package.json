@@ -6,7 +6,10 @@
     "packages/*"
   ],
   "scripts": {
-    "create-pattern": "bun scripts/create-pattern.ts"
+    "create-pattern": "bun scripts/create-pattern.ts",
+    "dev:singleton": "npm run --cwd patterns/singleton dev",
+    "build:singleton": "npm run --cwd patterns/singleton build",
+    "test:singleton": "npm run --cwd patterns/singleton test"
   },
   "dependencies": {
     "@types/node": "^20.0.0",
