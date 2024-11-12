@@ -21,6 +21,11 @@ function createPattern(patternName: string) {
       react: "^18.2.0",
       "react-dom": "^18.2.0",
     },
+    devDependencies: {
+      autoprefixer: "^10.4.20",
+      postcss: "^8.4.49",
+      tailwindcss: "^3.4.14",
+    },
   };
 
   fs.writeFileSync(
@@ -122,6 +127,17 @@ module.exports = {
 `;
 
   fs.writeFileSync(path.join(patternDir, "tailwind.config.js"), tailwindConfig);
+
+  const postcssConfig = `
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};
+`;
+
+  fs.writeFileSync(path.join(patternDir, "postcss.config.js"), postcssConfig);
 
   const readme = `
 # ${patternName} Pattern
